@@ -28,6 +28,10 @@ down:																			## Bring down the Docker Compose stack for the complete 
 php:																			## Bash in Docker container
 	$(exec) bash || true
 
+.PHONY: init
+init:																			## Initialize dependencies
+	$(exec) composer install
+
 logs:                                                                  	        ## Docker Compose logs
 	$(compose) logs -f
 
