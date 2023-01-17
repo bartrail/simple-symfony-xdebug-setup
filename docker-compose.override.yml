@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  php:
+    environment:
+      XDEBUG_MODE: develop,coverage,debug

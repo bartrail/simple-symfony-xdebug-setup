@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+
+  php:
+    build:
+      context: docker/dev
+      args:
+        - "USER_ID=${USER_ID-501}"
+    volumes:
+      - ./:/srv/share/:rw
+    ports:
+      - "8000:80"
+    environment:
+      XDEBUG_MODE: develop
+      XDEBUG_CONFIG: >-
+        client_host=host.docker.internal
+#        discover_client_host=true
+
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 'secret'
+      MYSQL_DATABASE: 'app'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql:rw
+
+volumes:
+  db-data:
+
