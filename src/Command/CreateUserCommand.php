@@ -39,9 +39,7 @@ class CreateUserCommand extends Command
 
         try {
             $this->userRepository->getUserByName($username);
-            throw new UserAlreadyExistsException(
-                sprintf('User with name [%s] already exists', $username)
-            );
+            throw new UserAlreadyExistsException(sprintf('User with name [%s] already exists', $username));
         } catch (UserNotFoundException) {
             // Happy Case
         }
