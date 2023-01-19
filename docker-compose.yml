@@ -15,7 +15,7 @@ services:
       XDEBUG_MODE: develop
       XDEBUG_CONFIG: >-
         client_host=host.docker.internal
-#        discover_client_host=true
+        discover_client_host=true
 
   db:
     image: mariadb:10.6
