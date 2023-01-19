@@ -16,9 +16,13 @@ exec:= $(compose) exec -u www-data php
 help:                                                                           ## shows this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_\-\.]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+.PHONY: build
+build:																			## Start the Docker Compose stack for the complete project
+	USER_ID="${UID}" $(compose) up -d --build --remove-orphans
+
 .PHONY: up
 up:																				## Start the Docker Compose stack for the complete project
-	USER_ID="${UID}" $(compose) up -d --build --remove-orphans
+	USER_ID="${UID}" $(compose) up -d
 
 .PHONY: down
 down:																			## Bring down the Docker Compose stack for the complete project
