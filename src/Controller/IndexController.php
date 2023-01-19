@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Webmozart\Assert\Assert;
 
 class IndexController extends AbstractController
 {
@@ -17,9 +16,9 @@ class IndexController extends AbstractController
     {
         $userName = $request->query->get('name') ?? 'world';
 
-        if(is_string($userName) === false) {
+        if(is_string($userName) === false || $userName === '') {
             throw new BadRequestHttpException(
-                sprintf('name must be a string - [%s] given', get_debug_type($userName))
+                sprintf('name must be a non-empty string - [%s] given', get_debug_type($userName))
             );
         }
 
